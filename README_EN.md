@@ -53,6 +53,8 @@ flowchart TB
     J --> M["Cost and inventory forecasting"]
 ```
 
+See the [detailed system architecture](docs/architecture_en.md) for component responsibilities, parameter governance, and traceability.
+
 ## My Contributions
 
 - Designed the parameter-management workflow, data structure, and maintenance process.
