@@ -61,7 +61,7 @@ See the [detailed system architecture](docs/architecture_en.md) for component re
 - Built parameter change, approval, notification, and update workflows.
 - Integrated model inputs and implemented scheduled and real-time execution.
 - Stored input snapshots, parameter versions, and results for comparison and traceability.
-- Managed publishing, exception notifications, production support, and cross-functional requirements.
+- Managed publishing, exception notifications, production support, and coordination of operational needs across functions.
 
 The core optimization model was led by another team member. My primary responsibility covered parameter and data governance, surrounding data processing, workflow automation, and system integration. Shared data-processing components were co-developed by the team.
 
