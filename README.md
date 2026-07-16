@@ -1,82 +1,82 @@
-**繁體中文** | [English](README_EN.md)
+**English** | [繁體中文](README_ZH-TW.md)
 
-# BOM 智慧運算與管理平台
+# Bill of Materials (BOM) Planning and Governance Platform
 
-建立跨部門共用的 BOM 管理機制，使運籌、採購與煉鋼單位能依相同參數、版本及發布結果進行規劃與作業，並強化原料成本與用料資訊的可追溯性。平台整合參數維護、簽核、運算、版本及發布流程，支援 BOM1 每週更新與 BOM2 現場即時觸發，涵蓋超過 **50 種原料**，並作為原料成本與庫存預測系統的上游資料基礎。
+Established a shared BOM management process that enables logistics, procurement, and steelmaking teams to plan and operate from the same parameters, versions, and published results. The platform integrates parameter maintenance, approval, calculation, version control, and publishing; it runs BOM1 weekly and triggers BOM2 in real time from shop-floor operations. It covers more than **50 raw materials** and provides upstream data for raw-material cost and inventory forecasting.
 
-## 專案概況
+## Project Overview
 
-| 項目 | 說明 |
+| Item | Description |
 |---|---|
-| 使用部門 | 運籌、採購、煉鋼 |
-| 個人職責 | 參數與資料管理、系統整合、自動化、上線維運 |
-| 更新方式 | BOM1 每週更新；BOM2 現場即時觸發 |
-| 上線時間 | 2023 年底，持續維運與改版 |
-| 管理規模 | 超過 50 種原料；每月成本約新台幣 10 億元 |
+| Business users | Logistics, procurement, and steelmaking |
+| My role | Parameter and data governance, system integration, automation, production support |
+| Update model | BOM1 weekly; BOM2 triggered in real time |
+| Go-live | Late 2023, with ongoing maintenance and enhancement |
+| Scale | More than 50 raw materials; approximately NT$1 billion monthly cost base |
 
-## 問題
+## Business Challenge
 
-上線前由人員手動執行 BOM，再將結果上傳至 Teams。更新時間不固定，檔案版次難以管理，也未完整保存價格、成分、採購限制及生產計畫等輸入條件。結果異常時，難以還原當時狀態及判斷問題來源。
+BOM runs were performed manually and uploaded to Teams on an irregular schedule. File versions and calculation inputs were not fully recorded, making it difficult to reconstruct the parameters and production plan used when a result required investigation.
 
-## 作法
+## Approach
 
-- 建立統一的參數維護、簽核及發布流程。
-- 整合原料成分、價格、採購限制、生產計畫與現場排程。
-- BOM1 採每週排程，供中期規劃使用；BOM2 由現場即時觸發。
-- 同步保存參數版本、輸入快照、運算結果及發布狀態。
-- 建立驗證報表、異常通知及歷史版本查詢。
+- Established a standardized process for parameter maintenance, approval, and release.
+- Integrated material composition, price, procurement limits, production plans, and shop-floor schedules.
+- Scheduled BOM1 weekly for planning and enabled real-time BOM2 requests from shop-floor systems.
+- Stored parameter versions, input snapshots, calculation results, and release status together.
+- Built validation reports, exception notifications, and historical version lookup.
 
-## 參數權責
+## Parameter Ownership
 
-| 參數 | 業務負責單位 |
+| Parameter | Business owner |
 |---|---|
-| BOM1／BOM2 原料成分 | 工業工程、品保 |
-| 原料價格及採購上下限 | 採購 |
-| 生產計畫 | 運籌生計 |
-| 現場排程與即時需求 | 煉鋼 |
-| 參數流程與資料平台 | 本人負責 |
+| BOM1 and BOM2 material composition | Industrial engineering and quality assurance |
+| Material prices and procurement limits | Procurement |
+| Production plan | Logistics production planning |
+| Shop-floor schedule and real-time demand | Steelmaking |
+| Parameter workflow and data platform | My responsibility |
 
-各單位負責專業內容；我負責資料結構、維護流程、版本紀錄及系統運作。
+Business teams own the domain decisions. I designed and maintained the data structure, workflow, version history, and operating platform.
 
-## 系統架構
+## Architecture
 
 ```mermaid
 flowchart TB
-    A["成分／價格／採購限制／生產計畫"] --> E["參數管理與簽核"]
-    E --> F["參數資料庫與版本紀錄"]
-    F --> G["排程與即時觸發"]
-    H["現場排程"] --> G
-    G --> I["BOM 核心模型"]
-    I --> J["結果、輸入快照與驗證紀錄"]
-    J --> K["BOM1 每週發布"]
-    J --> L["BOM2 即時回傳"]
-    J --> M["成本控制與庫存預測"]
+    A["Composition, prices, limits, and plans"] --> E["Parameter management and approval"]
+    E --> F["Parameter database and version history"]
+    F --> G["Scheduling and real-time orchestration"]
+    H["Shop-floor schedule"] --> G
+    G --> I["Core BOM model"]
+    I --> J["Results, input snapshots, and validation"]
+    J --> K["Weekly BOM1 release"]
+    J --> L["Real-time BOM2 response"]
+    J --> M["Cost and inventory forecasting"]
 ```
 
-詳細流程請見 [系統架構](docs/architecture.md)。
+See the [detailed system architecture](docs/architecture_en.md) for component responsibilities, parameter governance, and traceability.
 
-## 個人貢獻
+## My Contributions
 
-- 設計參數管理流程、資料結構及維護機制。
-- 建立參數異動、簽核、通知及資料更新流程。
-- 整合模型所需資料，建立排程與即時觸發機制。
-- 保存輸入快照、參數版本及結果，支援比較與追溯。
-- 負責發布、錯誤通知、上線維運及跨部門需求協調。
+- Designed the parameter-management workflow, data structure, and maintenance process.
+- Built parameter change, approval, notification, and update workflows.
+- Integrated model inputs and implemented scheduled and real-time execution.
+- Stored input snapshots, parameter versions, and results for comparison and traceability.
+- Managed publishing, exception notifications, production support, and cross-functional requirements.
 
-BOM 核心最佳化模型由團隊其他成員主責；我的工作重點為參數與資料治理、周邊資料處理、流程自動化及系統整合。共用資料處理元件由團隊共同開發。
+The core optimization model was led by another team member. My primary responsibility covered parameter and data governance, surrounding data processing, workflow automation, and system integration. Shared data-processing components were co-developed by the team.
 
-## 成果
+## Key Outcomes
 
-- 將人工、不定期作業改為 **BOM1 每週更新、BOM2 即時觸發**。
-- 建立參數、輸入及結果的版本紀錄，改善版次管理與異常追溯。
-- 明確化工業工程、品保、採購、運籌與煉鋼的參數權責。
-- 支援超過 **50 種原料**及每月約 **新台幣 10 億元**成本規模。
-- 成為[原料進耗存預測與庫存告警系統](https://github.com/ChienChienChien/Material_Forecasting_System)的上游資料基礎。
+- Replaced irregular manual runs with **weekly BOM1 updates and real-time BOM2 execution**.
+- Established parameter, input, and output version history for auditability and issue analysis.
+- Clarified ownership across industrial engineering, quality assurance, procurement, logistics, and steelmaking.
+- Supports more than **50 raw materials** and a monthly cost base of approximately **NT$1 billion**.
+- Provides upstream data for the [Raw Material Inventory Forecasting and Alert System](https://github.com/ChienChienChien/Material_Forecasting_System).
 
-## 使用技術
+## Technology
 
-Python、Pandas、SQL、關聯式資料庫、Power Apps、Power Automate、SharePoint、Power BI、API。
+Python, Pandas, SQL, relational databases, Power Apps, Power Automate, SharePoint, Power BI, and APIs.
 
-## 保密說明
+## Confidentiality
 
-本案例僅呈現去識別化的業務問題、個人貢獻與系統架構，不含公司原始資料、料號、價格、配方、連線資訊、內部資料表名稱、完整程式碼及核心模型細節。
+This case study presents de-identified business context, individual contributions, and system architecture only. It excludes proprietary data, material numbers, prices, formulas, connection details, internal table names, complete source code, and core model details.
