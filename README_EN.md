@@ -1,4 +1,4 @@
-[繁體中文](README.md) | **English**
+**English** | [繁體中文](README_ZH-TW.md)
 
 # Bill of Materials (BOM) Planning and Governance Platform
 
@@ -71,7 +71,7 @@ The core optimization model was led by another team member. My primary responsib
 - Established parameter, input, and output version history for auditability and issue analysis.
 - Clarified ownership across industrial engineering, quality assurance, procurement, logistics, and steelmaking.
 - Supports more than **50 raw materials** and a monthly cost base of approximately **NT$1 billion**.
-- Provides upstream data for the [Raw Material Inventory Forecasting and Alert System](https://github.com/ChienChienChien/Material_Forecasting_System/blob/master/README_EN.md).
+- Provides upstream data for the [Raw Material Inventory Forecasting and Alert System](https://github.com/ChienChienChien/Material_Forecasting_System).
 
 ## Technology
 
