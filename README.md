@@ -6,21 +6,21 @@ Starting from business use cases and user needs, the platform turns the cross-fu
 
 ## Purpose
 
-Raw materials account for approximately 70% to 80% of the total cost of stainless-steel production. Fluctuations in raw-material prices change the optimal material mix for each steel grade, directly affecting procurement planning and cost competitiveness.
+Raw materials account for approximately 70% to 80% of the total cost of stainless-steel manufacturing industry. Fluctuations in raw-material prices change the optimal material mix for each steel grade, directly affecting procurement planning and cost competitiveness.
 
-The lowest-cost BOM model relies on four critical inputs: raw-material quantity limits, raw-material composition, raw-material prices, and production plans. These inputs are owned by different functions and vary in update frequency, data format, validation method, and use case. This project therefore established consistent data definitions, business rules, and collaboration workflows, using standardized and automated processes to manage the input parameters and build a reliable data foundation for the model.
+The lowest-cost BOM model relies on four major inputs: raw-material quantity limits, raw-material composition, raw-material prices, and production plans. These inputs are owned by different functions and vary in update frequency, data format, validation method, and use case. In order to manage the input parameters and build reliable data for the lowest-cost BOM model, we established standardized and automated processe by defining consistent data definitions, business rules, and collaboration workflows.
 
-The BOM Management Platform was built from the ground up. It translates each function's professional judgment into data definitions, maintenance rules, and automated workflows. Each function is accountable for the data it owns, while all participating teams can review the BOM results together. This brings lowest-cost BOM decision logic into daily operations.
+We bulit the BOM Management Platform from the ground up. By translating each function's professional judgment into data definitions, maintenance rules, and automated workflows, and making each function accountable for the data it owns, the result of the lowest-cost BOM model is taken seriously by all related functions. This brings the decision-making based on the lowest-cost BOM model become critical and merge into daily operations.
 
 ## Outcomes
 
-- **Established a shared foundation of data and rules:** Standardized the definitions, sources, ownership, and validation methods for the four critical inputs, creating a single source of truth for BOM calculations.
-- **Brought analytical results into two decision-making scenarios:** Weekly runs produce steel-grade BOMs and aggregated material demand for the next three months, supporting procurement planning and weekly reviews. The shop floor can also recalculate BOMs immediately when schedules change instead of waiting for the next weekly run.
-- **Made every analysis reproducible and traceable:** Each run generates a unique key that links the raw-material quantity limits, composition, prices, production plan, and BOM output used in that run, making it possible to reconstruct the exact data conditions behind the result.
-- **Established a process for validation and continuous improvement:** Power BI tracks changes in weekly consumption forecasts and compares theoretical BOMs with actual material usage, allowing users to review gaps between model results and operations.
-- **Created a stable process for day-to-day operations:** The platform supports more than 50 raw materials and a monthly raw-material cost base of approximately NT$1 billion. If a calculation fails or the model cannot find a feasible solution, the relevant teams are notified immediately.
+- **Established a foundation of data and rules across functions:** Standardized the definitions, sources, ownership, and validation methods for the four major inputs, creating a single source of truth for BOM calculations.
+- **Brought BOM results into two decision-making scenarios:** Weekly runs produce steel-grade BOMs and aggregated material demand for the next three months, supporting procurement planning and weekly reviews. The shop floor can also recalculate BOMs immediately when schedules change instead of waiting for the next weekly run.
+- **Made every BOM reproducible and traceable:** Each run generates a unique key that links the raw-material quantity limits, composition, prices, production plan, and BOM output used in that run, making it possible to reconstruct the exact data conditions behind the result.
+- **Established a process for validation and continuous improvement:** Using Power BI tracks changes in weekly consumption forecasts and compares theoretical BOMs with actual material usage, allowing users to review gaps between model results and operations.
+- **Management Scale:** The platform supports more than 50 raw materials and a monthly raw-material cost base of approximately NT$1 billion
 
-The main value of the platform goes beyond workflow automation. It connects data, models, and cross-functional accountability in a shared decision-making process, allowing the lowest-cost BOM to be used, validated, and improved continuously.
+The platform’s greatest value goes beyond workflow automation. It connects data, models, and cross-functional roles and responsibilities into a consensus-driven decision-making process, enabling the lowest-cost BOM to be continuously adopted, validated, and improved.
 
 ## Approach
 
