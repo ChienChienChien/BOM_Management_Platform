@@ -1,112 +1,107 @@
 **English** | [繁體中文](README_ZH-TW.md)
 
-# BOM Management Platform
+# BOM Management Platform | Lowest-Cost BOM Data and Decision Platform
 
-*Operationalizing a lowest-cost BOM model for procurement planning and shop-floor execution.*
+Starting from business use cases and user needs, the platform turns the cross-functional data, business rules, and workflows required by the lowest-cost BOM model into a governed and traceable platform that supports day-to-day operations and ongoing decision-making.
 
-An end-to-end data and workflow platform that turned an optimization model into a repeatable business process. It governs cross-functional inputs, supports both weekly planning and real-time MES execution, and preserves full data lineage for every model run.
+## Purpose
 
-## Objective
+Raw materials account for approximately 70% to 80% of the total cost of stainless-steel production. Fluctuations in raw-material prices change the optimal material mix for each steel grade, directly affecting procurement planning and cost competitiveness.
 
-Raw materials account for approximately 70% to 80% of the total cost of stainless-steel production. As prices change, so does the optimal material mix for each steel grade, making BOM decisions critical to procurement planning and cost competitiveness.
+The lowest-cost BOM model relies on four critical inputs: raw-material quantity limits, raw-material composition, raw-material prices, and production plans. These inputs are owned by different functions and vary in update frequency, data format, validation method, and use case. This project therefore established consistent data definitions, business rules, and collaboration workflows, using standardized and automated processes to manage the input parameters and build a reliable data foundation for the model.
 
-The optimization model depends on four inputs: procurement limits, raw-material composition, prices, and the production plan. Each input is owned by a different function and follows its own update cycle, format, and validation process. Without common definitions, clear ownership, and reliable data delivery, the model could not move beyond ad hoc analysis and become part of day-to-day operations.
+The BOM Management Platform was built from the ground up. It translates each function's professional judgment into data definitions, maintenance rules, and automated workflows. Each function is accountable for the data it owns, while all participating teams can review the BOM results together. This brings lowest-cost BOM decision logic into daily operations.
 
-I built the BOM Management Platform from the ground up to close that gap. The platform translates domain knowledge into governed data and repeatable workflows, gives each function ownership of its inputs, and brings lowest-cost BOM decisions into both procurement planning and shop-floor production.
+## Outcomes
 
-## Impact
+- **Established a shared foundation of data and rules:** Standardized the definitions, sources, ownership, and validation methods for the four critical inputs, creating a single source of truth for BOM calculations.
+- **Brought analytical results into two decision-making scenarios:** Weekly runs produce steel-grade BOMs and aggregated material demand for the next three months, supporting procurement planning and weekly reviews. The shop floor can also recalculate BOMs immediately when schedules change instead of waiting for the next weekly run.
+- **Made every analysis reproducible and traceable:** Each run generates a unique key that links the raw-material quantity limits, composition, prices, production plan, and BOM output used in that run, making it possible to reconstruct the exact data conditions behind the result.
+- **Established a process for validation and continuous improvement:** Power BI tracks changes in weekly consumption forecasts and compares theoretical BOMs with actual material usage, allowing users to review gaps between model results and operations.
+- **Created a stable process for day-to-day operations:** The platform supports more than 50 raw materials and a monthly raw-material cost base of approximately NT$1 billion. If a calculation fails or the model cannot find a feasible solution, the relevant teams are notified immediately.
 
-- **Operationalized the model at business scale:** Supports more than 50 raw materials across a monthly raw-material cost base of approximately NT$1 billion.
-- **Connected analysis to planning and execution:** Gives procurement a rolling three-month view of material demand through weekly BOM runs, while allowing the shop floor to recalculate BOMs immediately when production schedules change.
-- **Established a governed source of truth:** Standardizes the definition, source, owner, and validation method for every model input used in a BOM run.
-- **Made every run reproducible:** A unique run key links the exact input versions and outputs for each calculation, enabling version comparison and root-cause analysis.
-- **Created a feedback loop:** Power BI compares forecast changes and theoretical BOMs with actual material usage; automated alerts notify the team when a run fails or the model cannot find a feasible solution.
+The main value of the platform goes beyond workflow automation. It connects data, models, and cross-functional accountability in a shared decision-making process, allowing the lowest-cost BOM to be used, validated, and improved continuously.
 
-The value of the platform goes beyond automation. It connects data ownership, analytical logic, and cross-functional accountability in one decision process, allowing the lowest-cost BOM to be used, challenged, and improved over time.
+## Approach
 
-## Solution
+### 1. Clarify use cases and define data rules
 
-### 1. Govern the four critical inputs
+For each type of input, I first clarified its role in BOM decisions, the responsible business function, its update frequency, and the controls it required. I then designed a management process based on the characteristics of the data:
 
-I worked with the business functions that own each input to define its purpose, source, update cadence, and control requirements. The platform then applies a workflow appropriate to each data type:
-
-| Input | Role in the model | Governance and delivery |
+| Input | Business and data definition | Management approach |
 |---|---|---|
-| Procurement limits | Represent the monthly quantities procurement expects to be available and act as supply constraints | Procurement maintains the limits in Power Apps; data is stored in SharePoint and synchronized to the on-premises SQL database |
-| Raw-material composition | Provides the elemental composition used to determine feasible material mixes for each steel grade | Business users maintain the data in Power Apps; changes require approval before they are synchronized to SQL |
-| Raw-material prices | Provide the economic basis for comparing feasible material combinations | A scheduled daily process generates standardized prices from procurement-defined pricing rules |
-| Production plan | Defines the production volume and calculation scope for each steel grade | Production planning uploads a standardized Excel file to SharePoint; Power Automate extracts and structures the data |
+| Raw-material quantity limits | Represent procurement's estimate of the quantity available for purchase each month and serve as supply constraints in the model | Procurement maintains the limits in Power Apps. The data is written to SharePoint and then synchronized to the on-premises SQL database |
+| Raw-material composition | Defines the composition data used by the model to calculate the material mix for each steel grade | The data is maintained in Power Apps. Changes must be approved by the relevant functions before being synchronized to the SQL database |
+| Raw-material prices | Provide the price basis for comparing different material combinations in the model | Standardized prices are generated on a daily schedule based on pricing definitions provided by procurement |
+| Production plan | Defines the planned production volume and calculation scope for each steel grade | The production planning team uploads a standardized Excel file to SharePoint, and Power Automate converts it into structured data |
 
-These workflows do more than transfer data. They embed ownership, validation, and formatting rules into the operating process so that the model receives consistent, trusted inputs.
+These workflows do more than move data. They embed data formats, ownership, and validation rules into daily operations, creating a reliable input foundation for the model.
 
-### 2. Automate the cross-system data flow
+### 2. Build a cross-system data flow
 
-Microsoft 365 provides the collaboration layer: Power Apps supports parameter maintenance, SharePoint and standardized Excel files capture business inputs, and Power Automate controls the workflows and extracts data. The On-premises Data Gateway moves approved and validated inputs into the on-premises SQL database used by the model.
+The Microsoft 365 platform is used to support cross-functional data exchange. Power Apps provides the parameter maintenance interface, while SharePoint and standardized Excel files capture input from each function. Power Automate controls the workflows and extracts the data, and the On-premises Data Gateway synchronizes it to the on-premises SQL database.
 
-### 3. Use one model for two operating scenarios
+### 3. Apply the same model to different decision-making processes
 
-Both workflows use the same lowest-cost BOM model. They differ only in the production plan, trigger, and delivery method required by the business scenario:
+Weekly planning and real-time shop-floor calculations use the same lowest-cost BOM model, but they use different production plans, triggers, and delivery methods based on the use case:
 
-| Scenario | Business need | Execution and delivery |
+| Use case | Decision need | Execution and delivery |
 |---|---|---|
-| Weekly planning | Give procurement a three-month view of raw-material demand and support the weekly review of model constraints | Power Automate calls a Flask service on a Windows VM. The resulting Excel file is returned to SharePoint and published to Teams |
-| Real-time production | Recalculate steel-grade BOMs immediately when the shop-floor schedule changes | MES calls a batch script through an API. Results are written to a staging table, and MES is notified when they are ready to retrieve |
+| Weekly planning | Give procurement visibility into raw-material demand for the next three months and support the weekly review of model constraints | Power Automate calls a Flask server on a Windows VM to run the model. The Excel output is returned to SharePoint and published to Teams |
+| Real-time shop-floor production | Generate a new BOM for each steel grade immediately when the production schedule changes | MES calls a batch file through an API to run the model. The results are written to a staging table, and MES is notified when they are ready to retrieve |
 
-Using one analytical model for both scenarios keeps planning and execution aligned instead of allowing separate calculation methods to develop over time.
+This design allows the same analytical logic to support both material planning and real-time operations, preventing different use cases from developing inconsistent calculation methods.
 
-### 4. Preserve lineage, validate results, and manage exceptions
+### 4. Build a BOM version data model, analytical validation, and exception management
 
-Every run receives a time-based run key. Predefined primary-key relationships connect that run to the exact procurement limits, composition, prices, production plan, steel-grade BOMs, and aggregated material demand used or produced by the model. The records are stored in `BOM_Record`, making each result reproducible and supporting version comparison and issue investigation.
+Each model run generates a unique time-based key. A predefined primary-key structure links the raw-material quantity limits, composition, prices, production plan, and BOM output used in that run. The data is stored in `BOM_Record`, allowing every result to be traced back to its complete input version and supporting result reproduction, version comparison, and issue investigation.
 
-Power BI uses this history to track changes in weekly consumption forecasts and compare theoretical BOMs with actual material usage. This helps business users identify gaps among the plan, model output, and shop-floor execution.
+Power BI uses the version data in `BOM_Record` to show changes in weekly consumption forecasts and compare theoretical BOMs with actual material usage. This allows users to identify differences among the plan, model results, and actual execution.
 
-The platform also retains an execution log for every run. A Power Automate webhook posts an alert to Teams when the application fails or the model returns no feasible solution, giving the team immediate visibility and the version context needed for root-cause analysis.
+An execution log is also stored for every run. If the program encounters an error or the model cannot find a feasible solution, a Power Automate webhook sends a message to Teams so that the team can respond quickly and use the version data to investigate the issue.
 
 ## Architecture
 
 ```mermaid
 flowchart TB
-    subgraph Inputs[Business Inputs and Ownership]
-        A[Procurement limits]
-        B[Raw-material composition]
-        C[Daily raw-material prices]
-        D[Production plan]
+    subgraph Source[Business Data and Ownership]
+        A[Procurement: raw-material quantity limits and prices]
+        B[Quality Assurance and Industrial Engineering: raw-material composition]
+        C[Production plan]
     end
 
-    A --> E[Power Apps and SharePoint workflows]
-    B --> E
-    D --> F[Standardized Excel and SharePoint]
-    E --> G[Power Automate and On-premises Data Gateway]
-    F --> G
-    C --> H[(On-premises SQL: governed model inputs)]
-    G --> H
+    A --> D[Data maintenance, format control, and approval]
+    B --> D
+    C --> D
+    D --> E[Power Apps, SharePoint, and Power Automate]
+    E --> F[(On-premises SQL database: standardized input data)]
 
-    subgraph Scenarios[Model Execution Scenarios]
-        I[Weekly planning: Power Automate to Flask]
-        J[Real-time MES: API to batch script]
+    subgraph UseCase[Analytical Model Use Cases]
+        G[Weekly planning: Power Automate and Flask]
+        H[MES shop-floor scheduling: API and batch]
     end
 
-    H --> K[Windows VM: lowest-cost BOM model]
-    I --> K
-    J --> K
+    G --> I[Windows VM: lowest-cost BOM model]
+    H --> I
+    F --> I
 
-    K --> L[(BOM_Record: input lineage and model outputs)]
-    K --> M[Planning output: Excel to SharePoint and Teams]
-    K --> N[Real-time output: staging table to MES]
-    L --> O[Power BI: trends and plan-versus-actual analysis]
-    K -. Failure or infeasible solution .-> P[Webhook to Teams alert]
+    I --> J[(BOM_Record: input versions and analytical results)]
+    I --> K[Planning results: Excel, SharePoint, and Teams]
+    I --> L[Real-time results: staging table and MES]
+    J --> M[Power BI: version, forecast, and theoretical-vs-actual analysis]
+    I -. Error or no feasible solution .-> N[Webhook alert to Teams]
 ```
 
-**My role:** I designed and built the platform end to end, from clarifying business use cases and defining data ownership and rules to implementing the workflows, data model, Power Platform automation, on-premises integration, MES interface, Power BI analysis, and run monitoring. Other team members owned the core optimization model, daily raw-material price calculation, and cost management.
+I was responsible for clarifying the use cases and defining the data and business rules, as well as designing and developing the parameter workflows, data model, Power Platform automation, on-premises integration, dual execution modes, MES integration, Power BI analysis, and execution monitoring. The core lowest-cost BOM model, raw-material price calculation, and cost management were handled by other team members.
 
-## Tech Stack
+## Technology
 
-| Layer | Technology | Purpose |
+| Capability | Technology | Use in the project |
 |---|---|---|
-| Business collaboration | Power Apps, SharePoint, Excel, Teams | Parameter maintenance, production-plan submission, approvals, reviews, and result publishing |
-| Data integration and automation | Power Automate, On-premises Data Gateway, webhook | Cloud-to-on-premises synchronization, workflow orchestration, model triggering, and exception alerts |
-| Application integration | Flask, REST API, batch script, MES | Scheduled execution and real-time shop-floor integration |
-| Data and execution | Python, SQL Server, Windows VM | Data processing, governed model inputs, versioned run data, model execution, and logging |
-| Analytics | Power BI | Forecast trends, version comparison, and theoretical-versus-actual material usage analysis |
+| User collaboration and workflows | Power Apps, SharePoint, Excel, Teams | Parameter maintenance, production-plan submission, approvals, reviews, and result publishing |
+| Data flow and automation | Power Automate, On-premises Data Gateway, webhook | Cloud-to-on-premises data synchronization, workflow control, model triggering, and exception notifications |
+| Application and system integration | Flask, REST API, batch file, MES | Model integration, scheduled execution, and real-time shop-floor calculations |
+| Data processing, modeling, and execution | Python, SQL Server, Windows VM | Data processing, standardized inputs, version data model, model execution, and log management |
+| Analysis and decision support | Power BI | Consumption forecasts, version changes, and theoretical-versus-actual material usage analysis |
 
-This case study contains only de-identified business context, data flows, platform architecture, and individual contributions. It excludes proprietary data, actual parameters, material numbers, formulas, connection details, and core optimization logic.
+This case study presents only de-identified business context, data flows, platform architecture, and individual contributions. It does not include company source data, actual parameters, material numbers, formulas, connection details, or details of the core model.
