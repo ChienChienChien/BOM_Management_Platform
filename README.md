@@ -6,15 +6,15 @@ Transform the cross-functional data, business rules, and usage workflows require
 
 ## Purpose
 
-Raw materials account for approximately 70% to 80% of the total cost of stainless-steel manufacturing. Fluctuations in raw-material prices change the optimal material mix for each steel grade, directly affecting procurement planning and cost competitiveness.
+The cost of raw materials account for approximately 70% to 80% of the total cost of stainless-steel manufacturing. Fluctuations in raw-material prices change the optimal material mix for each steel grade, directly affecting procurement planning and cost competitiveness.
 
-The lowest-cost BOM model relies on four major inputs: Raw material quantity limits, Raw material composition, Raw material prices, and production plans. These inputs are owned by different functions and vary in update frequency, data format, validation method, and use case. In order to manage the inputs and provide reliable data for the lowest-cost BOM model, we established standardized and automated processs by defining consistent data definitions, business rules, and collaboration workflows.
+The lowest-cost BOM model relies on four major inputs: Raw material quantity limits, raw material composition, raw material prices, and production plans. These inputs are owned by different functions and vary in update frequency, data format, validation method, and use case. In order to manage the inputs and provide reliable data for the lowest-cost BOM model, we established standardized and automated processes by defining consistent data definitions, business rules, and collaboration workflows.
 
 We built the BOM Management Platform from the ground up, translating each function’s domain expertise into data definitions, maintenance rules, and automated workflows. Each stakeholder group owns the data within its domain and jointly reviews BOM results, embedding the decision logic for the lowest-cost BOM into day-to-day operations.
 
 ## Outcomes
 
-- **Established a shared data and rules across functions:** Standardized the definitions, sources, ownership, and validation methods for the four major inputs, creating a single source of truth for BOM calculations.
+- **Established a shared foundation for data and rules:** Standardized the definitions, sources, ownership, and validation methods for the four major inputs, creating a single source of truth for BOM calculations.
 - **Integrated BOM results into two use cases:** Weekly runs produce steel-grade BOMs and aggregated material demand for the next three months, supporting procurement planning and weekly reviews. The shop floor can also recalculate BOMs immediately when schedules change instead of waiting for the next weekly run.
 - **Made every BOM reproducible and traceable:** Each run generates a unique key that links the raw-material quantity limits, composition, prices, production plan, and BOM output used in that run, making it possible to reconstruct the exact data conditions behind the result.
 - **Established a process for validation and continuous improvement:** Power BI tracks changes in weekly consumption forecasts and compares theoretical BOMs with actual material usage, allowing users to review gaps between model results and operations.
@@ -98,7 +98,7 @@ flowchart TB
 
 | Capability | Technologies | Use in the project |
 |---|---|---|
-| User Collaboration and Interface Design | Power Apps, SharePoint, Excel | Parameter maintenance and production plan submission |
+| User Collaboration and Interfaces | Power Apps, SharePoint, Excel | Parameter maintenance and production plan submission |
 | Data Workflows and Automation | Power Automate, On-premises Data Gateway, Webhook, Teams | Cloud-to-on-premises data synchronization, workflow orchestration, model triggering, and exception notifications |
 | Data Processing and Application Integration | Flask, Python, SQL Server, Windows Server | Model integration, scheduled execution, and real-time shop-floor calculations |
 | Analytics and Decision Support | Power BI | Material demand and theoretical-versus-actual usage analysis |
